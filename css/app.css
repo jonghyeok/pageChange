@@ -1,0 +1,8 @@
+body{
+  height : 500px;
+}
+
+.menu .selected{
+  font-weight: bold;
+  border-bottom: 1px solid #999;
+}
