@@ -19,6 +19,8 @@ $(document).ready(function(){
    snail.pageNow = 0;
    snail.pageTarget = '#main_content';
    snail.pageMax = snail.pageData.index.length-1;
+   snail.pageAnime = 'none';
+   snail.animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
    snail.init = function(){
      snail.initPage();
@@ -36,7 +38,16 @@ $(document).ready(function(){
                $(this).removeClass("selected")
              }
           });
-         $( snail.pageTarget ).html(result);   });
+         $( snail.pageTarget ).html(result);
+
+         if( snail.pageAnime == 'left' || snail.pageAnime == 'right' ){
+           var animationName = snail.pageAnime == 'left' ? 'slideInRight' :'slideInLeft';
+           $(snail.pageTarget).addClass('animated ' + animationName).one(snail.animationEnd, function() {
+               $(snail.pageTarget).removeClass('animated ' + animationName);
+           });
+           snail.pageAnime = 'none';
+         }
+       });
     }else{
       location.hash = 'main';
     }
@@ -45,6 +56,7 @@ $(document).ready(function(){
   snail.swipePage = function(type){
       var nextMove = snail.pageNow;
 
+      snail.pageAnime = type;
       if(type == 'left'){
         nextMove++;
       }else if(type == 'right'){
