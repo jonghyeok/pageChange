@@ -7,7 +7,7 @@ $(document).ready(function(){
         snail.swipePage(direction);
       }
     });
-
+alett("aaa");
    snail.pageData = {
      'index' : ['#main','#img','#setting'],
      'pages' : {
